@@ -2,6 +2,7 @@ package com.labregister.api.items.controller;
 
 import com.google.common.base.Preconditions;
 import com.labregister.api.core.creation.EntityCreatedResponse;
+import com.labregister.api.core.updated.EntityUpdatedResponse;
 import com.labregister.api.items.domain.Item;
 import com.labregister.api.items.service.ItemService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,8 +42,15 @@ public class ItemController {
 	}
 
 	// TODO write PUT (update) method here
-	// Calls THE SERVICE CALSS AND UPDATES THE ITEM
-	// RETURNS AN ENTITYUPDATEDRESPONSE<>
+	public EntityUpdatedResponse<Item> updateItem(@RequestBody Item request){
+		Item updated = itemService.updateItem(request);
+		return new EntityUpdatedResponse<>(updated, getItemLocation(updated));
+
+		// Calls THE SERVICE CALSS AND UPDATES THE ITEM
+		// RETURNS AN ENTITYUPDATEDRESPONSE<>
+	}
+
+
 
 	private URI getItemLocation(Item item) {
 		UriTemplate itemLocation = new UriTemplate(RESOURCE_ITEM);

@@ -44,7 +44,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Item updateItem(Item item) {
+	public Item updateItem(Item request) {
 
 		/*
 		* - Validate update (go into EntityValidator.validateUpdate and do validation)
@@ -55,6 +55,13 @@ public class ItemServiceImpl implements ItemService {
 		* */
 
 		// need to check how to correctly call the two update validations and their purpose
+		entityValidator.validateUpdate(request);
+
+		for (Item item : this.items) {
+			if (request.getId().equals(item.getId())) {
+				item.setAttributes(request.getAttributes());
+			}
+		}
 
 		return null;
 	}

@@ -28,7 +28,7 @@ export class AddItemsDialog {
    * @type {Array<Array<string>>}
    * @memberof AddItemsDialog
    */
-  public attributes: Array<Array<string>> = new Array();
+  public attributes: Array<Array<string>> = [];
 
   /**
    * Add empty attribute to attributes array
@@ -68,7 +68,7 @@ export class AddItemsDialog {
    */
   resetDialog() {
     this.itemName = '';
-    this.attributes = new Array();
+    this.attributes = [];
   }
 
   /**
