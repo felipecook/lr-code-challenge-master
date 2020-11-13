@@ -40,6 +40,10 @@ public class ItemController {
 		return new EntityCreatedResponse<>(created, getItemLocation(created));
 	}
 
+	// TODO write PUT (update) method here
+	// Calls THE SERVICE CALSS AND UPDATES THE ITEM
+	// RETURNS AN ENTITYUPDATEDRESPONSE<>
+
 	private URI getItemLocation(Item item) {
 		UriTemplate itemLocation = new UriTemplate(RESOURCE_ITEM);
 		Map<String, String> uriVariables = new HashMap<>();

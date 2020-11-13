@@ -12,6 +12,12 @@ import java.util.Map;
  */
 public class Item implements Entity, Comparable<Item> {
 
+	// TODO create a map that holds creation date as key and value is another map of attributes corresponding to that
+
+	// TODO can we assume that the id is unique to the item?
+	// holds the different versions of items, using their date to map to the map of attributes
+	private Map<@NotBlank Date, Map<@NotBlank String, @NotBlank String>> versionedAttributes = new HashMap<>();
+
 	private String id;
 
 	@NotBlank
@@ -66,6 +72,7 @@ public class Item implements Entity, Comparable<Item> {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
 
 	@Override
 	public int compareTo(Item item) {

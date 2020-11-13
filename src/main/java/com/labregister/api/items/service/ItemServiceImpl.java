@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class ItemServiceImpl implements ItemService {
 
+	// This is the DB
 	private List<Item> items;
 
 	private EntityValidator entityValidator;
@@ -35,6 +36,27 @@ public class ItemServiceImpl implements ItemService {
 		return this.items.stream()
 		                 .sorted()
 		                 .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Item> updateItems(List<Item> items) {
+		return null;
+	}
+
+	@Override
+	public Item updateItem(Item item) {
+
+		/*
+		* - Validate update (go into EntityValidator.validateUpdate and do validation)
+		* - Find teh Item object in the items list using the ID
+		* - Update with the new attributes/arguments
+		* - Return the updated item
+		*
+		* */
+
+		// need to check how to correctly call the two update validations and their purpose
+
+		return null;
 	}
 
 	@Override
