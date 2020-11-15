@@ -5,10 +5,15 @@ import com.labregister.api.core.creation.EntityCreatedResponse;
 import com.labregister.api.core.updated.EntityUpdatedResponse;
 import com.labregister.api.items.domain.Item;
 import com.labregister.api.items.service.ItemService;
+import java.util.NoSuchElementException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriTemplate;
 
@@ -42,9 +47,9 @@ public class ItemController {
 	}
 
 	// TODO write PUT (update) method here
-	@RequestMapping(value = "/items", method = RequestMethod.PUT)
-	public EntityUpdatedResponse<Item> updateItem(@RequestBody Item request){
-		Item updated = itemService.updateItem(request);
+	@RequestMapping(value = "/items/{itemId}", method = RequestMethod.PUT)
+	public EntityUpdatedResponse<Item> updateItem(@RequestBody Item request, @PathVariable String itemId){
+		Item updated = itemService.updateItem(request, itemId);
 		return new EntityUpdatedResponse<>(updated, getItemLocation(updated));
 
 		// Calls THE SERVICE CALSS AND UPDATES THE ITEM
@@ -59,4 +64,10 @@ public class ItemController {
 		uriVariables.put("id", item.getId());
 		return itemLocation.expand(uriVariables);
 	}
+
+	@ExceptionHandler(NoSuchElementException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	private void notFound(){}
+
+
 }
