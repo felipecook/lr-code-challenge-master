@@ -57,13 +57,21 @@ public class ItemServiceImpl implements ItemService {
 		// need to check how to correctly call the two update validations and their purpose
 		entityValidator.validateUpdate(request);
 
-		for (Item item : this.items) {
+	/*	for (Item item : this.items) {
 			if (request.getId().equals(item.getId())) {
-				item.setAttributes(request.getAttributes());
+				;
+			}
+		}*/
+
+		for (int i = 0; i < items.size(); i++) {
+			if (request.getName().equals(items.get(i).getName())) {
+				items.remove(i);
 			}
 		}
+		items.add(request);
+		// delete the old one and replace with new requested one.
 
-		return null;
+		return request;
 	}
 
 	@Override

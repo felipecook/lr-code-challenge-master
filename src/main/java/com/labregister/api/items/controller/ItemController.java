@@ -42,6 +42,7 @@ public class ItemController {
 	}
 
 	// TODO write PUT (update) method here
+	@RequestMapping(value = "/items", method = RequestMethod.PUT)
 	public EntityUpdatedResponse<Item> updateItem(@RequestBody Item request){
 		Item updated = itemService.updateItem(request);
 		return new EntityUpdatedResponse<>(updated, getItemLocation(updated));

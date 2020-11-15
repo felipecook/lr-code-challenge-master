@@ -47,3 +47,27 @@ export async function postItem(item: Item): Promise<Item> {
 
   return response.json();
 }
+
+/**
+ * Update a item.
+ *
+ * @export
+ * @param {Item} item The item to update
+ * @return {Promise<Item>} The updated item
+ */
+export async function putItem(item: Item): Promise<Item> {
+  const response = await fetch(
+    itemsEndpoint,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item),
+    }
+  );
+
+  return response.json();
+}
+
+

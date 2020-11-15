@@ -50,4 +50,21 @@ export class App {
     await Api.postItem(item);
     this.getAllItems();
   }
+
+  /**
+   * Update an item
+   *
+   *
+   * @param {Api.Item} item
+   * @memberof App
+   */
+  updateItem = async (item: Api.Item): Promise<void> => {
+    await Api.putItem(item);
+    this.getAllItems();
+  }
+
+
 }
+
+
+
