@@ -10,7 +10,7 @@ public interface ItemService {
 
 	List<Item> getItems();
 
-	List<Item> updateItems(List<Item> items);
+	/*List<Item> updateItems(List<Item> items);*/
 
 	Item updateItem(Item item, String itemId);
 

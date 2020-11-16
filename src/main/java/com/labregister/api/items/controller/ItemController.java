@@ -51,7 +51,6 @@ public class ItemController {
 	public EntityUpdatedResponse<Item> updateItem(@RequestBody Item request, @PathVariable String itemId){
 		Item updated = itemService.updateItem(request, itemId);
 		return new EntityUpdatedResponse<>(updated, getItemLocation(updated));
-
 		// Calls THE SERVICE CALSS AND UPDATES THE ITEM
 		// RETURNS AN ENTITYUPDATEDRESPONSE<>
 	}

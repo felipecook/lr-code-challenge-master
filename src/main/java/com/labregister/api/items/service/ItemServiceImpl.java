@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class ItemServiceImpl implements ItemService {
 
 	// This is the DB
-	private List<Item> items;
+	//private List<Item> items;
 
 	private Map<String, Deque<Item>> itemMap;
 
@@ -29,7 +29,7 @@ public class ItemServiceImpl implements ItemService {
 
 	public ItemServiceImpl(EntityValidator entityValidator) {
 		this.entityValidator = entityValidator;
-		this.items = new ArrayList<>();
+		//this.items = new ArrayList<>();
 		this.itemMap = new HashMap<>();
 	}
 
@@ -53,66 +53,60 @@ public class ItemServiceImpl implements ItemService {
 		                 .collect(Collectors.toList());*/
 	}
 
-	@Override
+	/*@Override
 	public List<Item> updateItems(List<Item> items) {
 		return null;
-	}
+	}*/
 
 	@Override
 	public Item updateItem(Item request, String itemId) {
+		// if you have new content, lets add those attributes to the old attributes
+
+		/*t
+		 * - Validate update (go into EntityValidator.validateUpdate and do validation)
+		 * - Find teh Item object in the items list using the ID
+		 * - Update with the new attributes/arguments
+		 * - Return the updated item
+		 *
+		 * */
+		// need to check how to correctly call the two update validations and their purpose
 
 		if (!itemMap.containsKey(itemId)){
 			throw new NoSuchElementException();
 		}
 		request.setId(itemId);
 
-		// if you have new content, lets add those attributes to the old attributes
 
-		/*t
-		* - Validate update (go into EntityValidator.validateUpdate and do validation)
-		* - Find teh Item object in the items list using the ID
-		* - Update with the new attributes/arguments
-		* - Return the updated item
-		*
-		* */
-
-		// need to check how to correctly call the two update validations and their purpose
 		entityValidator.validateUpdate(request);
 
 		save(request);
 
+		return request;
 
 	/*	for (Item item : this.items) {
 			if (request.getId().equals(item.getId())) {
 				;
 			}
 		}*/
-
 		/*if(items.contains())
-
-
 		for (int i = 0; i < items.size(); i++) {
 			if (request.getId().equals(items.get(i).getId())) {
 				//items.get(i).setVersionedAttributes();
 				items.get(i).setAttributes(request.getAttributes());
 			}
 		}*/
-
-
-
-
 		// delete the old one and replace with new requested one.
 
-		return request;
+
 	}
 
 	@Override
 	public void deleteAllItems() {
-		this.items.clear();
+		this.itemMap.clear();
 	}
 
 	private Item save(Item item) {
-		this.items.add(item);
+		//this.items.add(item);
 		Deque<Item> items = this.itemMap.getOrDefault(item.getId(), new LinkedList<>());
 		items.add(item);
 		this.itemMap.putIfAbsent(item.getId(), items);
